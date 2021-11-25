@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="en"
+      lang="en">
+
+<f:metadata>
+    <f:viewAction action="#{generoBean.Listar}"/>
+    <f:viewAction action="#{administradorBean.verificarSessaoAdmin}"/>
+</f:metadata>
+<h:head>
+    <title>Listar Gêneros</title>
+    <h:outputScript name="locales/locale-pt.js" library="primefaces"/>
+</h:head>
+
+<h:body>
+    <h:form>
+        <ui:include src="menu-inicial.xhtml">
+
+        </ui:include>
+
+        <p:breadCrumb>
+            <p:menuitem value="Home" outcome="home.xhtml"/>
+            <p:menuitem value="Cadastros"/>
+            <p:menuitem value="Gêneros"/>
+        </p:breadCrumb>
+        <p:card>
+
+            <p:messages closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+
+            <p:dataTable var="genero" value="#{generoBean.generos}">
+                <f:facet name="header">
+                    <p:button icon="pi pi-plus" outcome="genero-novo.xhtml"/>
+                </f:facet>
+                <p:column headerText="Nome">
+                    <h:outputText value="#{genero.nomeGenero}"/>
+                </p:column>
+
+
+                <p:column>
+                    <p:commandButton icon="pi pi-pencil" actionListener="#{generoBean.selecionarEdicao(genero)}"/>
+                    <p:spacer width="1"/>
+                    <p:commandButton icon="pi pi-trash" actionListener="#{generoBean.selecionarExclusao(genero)}"/>
+                </p:column>
+            </p:dataTable>
+
+        </p:card>
+    </h:form>
+</h:body>
+
+</html>

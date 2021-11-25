@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="en" lang="en">
+
+
+<h:head>
+    <title>BEM VINDO A UNIFIO PLAY</title>
+</h:head>
+
+<h:form>
+
+    <p:breadCrumb>
+        <p:menuitem value="Home" outcome="home.xhtml"/>
+        <p:menuitem value="Unifio Play" styleClass="ui-button-raised ui-button-secondary" outcome="home.xhtml"/>
+
+    </p:breadCrumb>
+
+
+    <p:card>
+        <p:messages closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+
+
+            <h2>Você é Usuário ou Administrador?</h2>
+            <p:splitter style="height: 150px" styleClass="p-mb-4">
+                <p:splitterPanel styleClass="p-d-flex p-ai-center p-jc-center" style="display: flex; align-items: center;
+                         justify-content: center;">
+                    <p:column>
+                        <p:commandButton value="Usuário" icon="pi pi-users"
+                                         style="height:35%; border-radius: 40%; font-size: 20px"
+                                         actionListener="#{usuarioBean.user(usuario) }"/>
+
+                    </p:column>
+                </p:splitterPanel>
+                <p:splitterPanel styleClass="p-d-flex p-ai-center p-jc-center" style="display: flex; align-items: center;
+                         justify-content: center">
+                    <p:column>
+                        <p:commandButton value="Admin ." icon="pi pi-sitemap"
+                                         style="height:35%; border-radius: 40%; font-size: 20px"
+                                         actionListener="#{usuarioBean.adm(adm)}"/>
+
+                    </p:column>
+                </p:splitterPanel>
+            </p:splitter>
+
+
+
+    </p:card>
+</h:form>
+<h:body>
+
+</h:body>
+</html>

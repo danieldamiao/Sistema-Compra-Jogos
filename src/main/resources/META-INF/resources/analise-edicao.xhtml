@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="en" lang="en">
+<f:metadata>
+    <f:viewAction action="#{analiseBean.carregar}"/>
+    <f:viewAction action="#{administradorBean.verificarSessaoAdmin}"/>
+
+</f:metadata>
+
+<h:head>
+    <title>Analise Edição</title>
+    <h:outputScript name="locales/locale-pt.js" library="primefaces"/>
+</h:head>
+
+<h:body>
+    <h:form>
+
+        <ui:include src="menu-inicial.xhtml">
+
+        </ui:include>
+
+        <p:breadCrumb>
+            <p:menuitem value="Home" />
+            <p:menuitem value="Cadastros"/>
+            <p:menuitem value="Analises" outcome="analise-listagem"/>
+            <p:menuitem value="Edição"/>
+        </p:breadCrumb>
+
+        <p:card>
+            <p:messages closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+
+            <h:panelGrid columns="1" style="margin-left: 2%"  columnClasses="ui-md-12">
+
+                <p:datePicker value="#{analiseBean.analise.periodo}" placeholder="Data"/>
+                <p:autoUpdate/>
+
+                <p:inputText value="#{analiseBean.analise.titulo}" placeholder="Titulo" >
+                    <p:autoUpdate/>
+                </p:inputText>
+
+                <p:selectOneRadio value="#{analiseBean.analise.situacao}" unselectable="true" style="width: 100%">
+                    <f:selectItem itemLabel="Recomendado" itemValue="Recomendado"/>
+                    <f:selectItem itemLabel="Não recomendado" itemValue="Não recomendado"/>
+                </p:selectOneRadio>
+
+                <p:inputTextarea value="#{analiseBean.analise.descricao}" rows="6" placeholder="Descrição" style="width: 100%">
+                    <p:autoUpdate/>
+                </p:inputTextarea>
+
+                <p:selectOneMenu value="#{analiseBean.analise.usuario}" converter="omnifaces.SelectItemsConverter" style="width: 100%" disabled="true">
+                    <f:selectItem itemLabel="Usuario" noSelectionOption="true"/>
+
+                    <f:selectItems value="#{analiseBean.usuarios}" var="usuario" itemValue="#{usuario}" itemLabel="#{usuario.nome}"/>
+                    <p:autoUpdate/>
+                </p:selectOneMenu>
+
+            </h:panelGrid>
+
+            <h:panelGrid columns="2" columnClasses="ui-md-4" style="margin-left: 2%">
+                <p:commandButton value="Editar" actionListener="#{analiseBean.salvar}" icon="pi pi-save"/>
+                <p:button value="Voltar" outcome="analise-listagem.xhtml" icon="pi pi-times"/>
+            </h:panelGrid>
+        </p:card>
+
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="en"
+      lang="en">
+
+<f:metadata>
+    <f:viewAction action="#{analiseBean.listar}"/>
+    <f:viewAction action="#{administradorBean.verificarSessaoAdmin}"/>
+</f:metadata>
+
+<h:head>
+    <title>Analise Listar</title>
+    <h:outputScript name="locales/locale-pt.js" library="primefaces"/>
+</h:head>
+
+<h:body>
+    <h:form>
+
+        <ui:include src="menu-inicial.xhtml">
+
+        </ui:include>
+
+        <p:breadCrumb>
+            <p:menuitem value="Home" />
+            <p:menuitem value="Cadastros"/>
+            <p:menuitem value="Analises"/>
+            <p:menuitem value="Listagem"/>
+        </p:breadCrumb>
+
+        <p:card>
+            <p:messages closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+
+            <p:dataTable value="#{analiseBean.analises}" var="analise">
+
+                <f:facet name="header">
+                    <p:button outcome="analise-novo.xhtml" icon="pi pi-plus"/>
+                </f:facet>
+
+                <p:column headerText="Data">
+                    <h:outputText value="#{analise.periodo}">
+                        <f:convertDateTime type="localDate" pattern="dd/MM/yyyy hh:mm"/>
+                    </h:outputText>
+                </p:column>
+
+
+                <p:column headerText="Titulo">
+                    <h:outputText value="#{analise.titulo}"/>
+                </p:column>
+
+                <p:column headerText="Situação">
+                    <h:outputText value="#{analise.situacao}"/>
+                </p:column>
+
+                <p:column headerText="Descrição">
+                    <h:outputText value="#{analise.descricao}"/>
+                </p:column>
+
+                <p:column headerText="Usuario">
+                    <h:outputText value="#{analise.usuario.nome}"/>
+                </p:column>
+
+                <p:column>
+                    <p:commandButton icon="pi pi-pencil" actionListener="#{analiseBean.selectEdicao(analise)}"/>
+                    <p:spacer width="2"/>
+                    <p:commandButton icon="pi pi-trash"  actionListener="#{analiseBean.selectExclusao(analise)}"/>
+                    <p:button outcome="jogo-listar-compra.xhtml" value="voltar"/>
+                </p:column>
+            </p:dataTable>
+
+        </p:card>
+    </h:form>
+</h:body>
+</html>

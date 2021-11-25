@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xml:lang="en"
+      lang="en">
+<f:metadata>
+    <f:viewAction action="#{administradorBean.verificarSessaoAdmin}"/>
+</f:metadata>
+
+<h:head>
+    <title>Inicial</title>
+</h:head>
+<h:body>
+    <h:form>
+    <p:menubar style="background-color: #fff">
+        <p:submenu label="Usuários" icon="pi pi-fw pi-user">
+            <p:menuitem value="Novo Usuário" url="usuario-novo.xhtml"/>
+            <p:menuitem value="Listar Usuários" url="usuario-listagem.xhtml"/>
+        </p:submenu>
+        <p:submenu label="Análises" icon="pi pi-thumbs-up">
+            <p:menuitem value="Nova Análise" url="analise-novo.xhtml"/>
+            <p:menuitem value="Listar Análises" url="analise-listagem.xhtml"/>
+        </p:submenu>
+
+        <p:submenu label="Desenvolvedores" icon="pi pi-id-card">
+            <p:menuitem value="Novo Desenvolvedore" url="desenvolvedor-novo.xhtml"/>
+            <p:menuitem value="Listar Desenvolvedores" url="desenvolvedor-listar.xhtml"/>
+        </p:submenu>
+        <p:submenu label="Gêneros" icon="pi pi-sitemap">
+            <p:menuitem value="Novo Gênero" url="genero-novo.xhtml"/>
+            <p:menuitem value="Listar Gêneros" url="genero-listar.xhtml"/>
+        </p:submenu>
+        <p:submenu label="Jogos" icon="pi pi-fw pi-discord">
+            <p:menuitem value="Novo Jogos" url="jogo-novo.xhtml"/>
+            <p:menuitem value="Listar Jogo" url="jogo-listar.xhtml"/>
+        </p:submenu>
+        <p:submenu label="Compras" icon="pi pi-fw pi-shopping-cart">
+            <p:menuitem value="Listar Compras" url="compra-listagem.xhtml"/>
+        </p:submenu>
+        <p:submenu label="Pagamentos" icon="pi pi-wallet">
+            <p:menuitem value="Listar Pagamentos" url="pagamento-listagem.xhtml"/>
+        </p:submenu>
+
+            <p:menuitem value="Sair" icon="pi pi-fw pi-sign-out" actionListener="#{administradorBean.finalizar}" rendered="#{administradorBean.logged}"/>
+            <p:menuitem value="Logar" icon="pi pi-fw pi-sign-in" actionListener="#{administradorBean.login}" rendered="#{!administradorBean.logged}"/>
+
+    </p:menubar>
+    </h:form>
+</h:body>
+</html>

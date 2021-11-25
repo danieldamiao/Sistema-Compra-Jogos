@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+
+<f:metadata>
+    <f:viewAction action="#{compraBean.novo}"/>
+    <f:viewAction action="#{usuarioBean.verificarSessaoUsuario}"/>
+</f:metadata>
+
+<h:head>
+    <title>Compra Novo</title>
+</h:head>
+
+<h:form>
+
+
+    <p:breadCrumb>
+        <p:menuitem value="Home" outcome="home.xhtml"/>
+        <p:menuitem value="Compra"/>
+        <p:menuitem value="Novo"/>
+    </p:breadCrumb>
+
+    <p:card>
+        <p:messages closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+
+        <h:panelGrid columns="1" style="margin-left: 2%" columnClasses="ui-md-12">
+
+            <p:selectOneMenu value="#{compraBean.compra.jogo}" converter="omnifaces.SelectItemsConverter" placeholder="Confirmar Jogo" style="width: 100%">
+                <f:selectItem itemLabel="Confirme seu Jogo" noSelectionOption="true"/>
+                <f:selectItems value="#{compraBean.jogos}" var="jogos" itemValue="#{jogos}"
+                               itemLabel="#{jogos.tituloJogo}"/>
+                <p:autoUpdate/>
+            </p:selectOneMenu>
+
+            <p:selectOneMenu value="#{compraBean.compra.usuario}" converter="omnifaces.SelectItemsConverter"  style="width: 100%">
+                <f:selectItem itemLabel="Confirme seu Usuario" noSelectionOption="true"/>
+                <f:selectItems value="#{compraBean.usuarios}" var="usuarios" itemValue="#{usuarios}"
+                               itemLabel="#{usuarios.nome}"/>
+                <p:autoUpdate/>
+            </p:selectOneMenu>
+
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="margin-left: 2.5%" columnClasses="ui-md-12">
+            <p:commandButton value="Confirmar compra" actionListener="#{compraBean.salvarPagamento}" icon="pi pi-save"/>
+            <p:button styleClass="ui-button-danger" value="Cancelar compra" outcome="jogo-listar-compra.xhtml" icon="pi pi-times" style=" width: 100%"/>
+        </h:panelGrid>
+
+    </p:card>
+</h:form>
+<h:body>
+
+</h:body>
+</html>

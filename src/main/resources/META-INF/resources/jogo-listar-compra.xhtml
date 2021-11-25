@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="en"
+      lang="en">
+
+<f:metadata>
+    <f:viewAction action="#{jogoBean.Listar}"/>
+    <f:viewAction action="#{usuarioBean.verificarSessaoUsuario}"/>
+</f:metadata>
+<h:head>
+    <title>Listar Jogos</title>
+    <h:outputScript name="locales/locale-pt.js" library="primefaces"/>
+</h:head>
+
+<h:body>
+    <h:form>
+
+        <p:menubar>
+            <p:menuitem value="Home" outcome="home.xhtml"/>
+            <p:menuitem value="Jogos"/>
+            <p:menuitem value="Sair" icon="pi pi-fw pi-sign-out" actionListener="#{usuarioBean.finalizar}" rendered="#{usuarioBean.logged}"/>
+        </p:menubar>
+
+
+        <p:card>
+
+            <p:messages closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+
+            <p:dataTable var="jogo" value="#{jogoBean.jogos}">
+                <p:column headerText="Título">
+                    <h:outputText value="#{jogo.tituloJogo}"/>
+                </p:column>
+                <p:column headerText="Preço">
+                    <h:outputText value="#{jogo.precoJogo}"/>
+                </p:column>
+                <p:column headerText="Gênero">
+                    <h:outputText value="#{jogo.genero.nomeGenero}"/>
+                </p:column>
+                <p:column headerText="Desenvolvedor">
+                    <h:outputText value="#{jogo.desenvolvedor.nomeDev}"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Análises" icon="pi pi-thumbs-up" actionListener="#{jogoBean.selecionarAnalise(jogo) }"/>
+                </p:column>
+                <p:column>
+                    <p:commandButton value="Comprar" icon="pi pi-wallet" actionListener="#{jogoBean.compra(jogo) }"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </p:card>
+    </h:form>
+</h:body>
+
+</html>

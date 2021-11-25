@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="en"
+      lang="en">
+
+<f:metadata>
+    <f:viewAction action="#{usuarioBean.listar}"/>
+    <f:viewAction action="#{administradorBean.verificarSessaoAdmin}"/>
+</f:metadata>
+
+<h:head>
+    <title>Usuário Listar</title>
+    <h:outputScript name="locales/locale-pt.js" library="primefaces"/>
+</h:head>
+
+<h:body>
+    <h:form>
+
+        <ui:include src="menu-inicial.xhtml">
+
+        </ui:include>
+
+        <p:breadCrumb>
+            <p:menuitem value="Home" outcome="home.xhtml"/>
+            <p:menuitem value="Cadastros"/>
+            <p:menuitem value="Usuários"/>
+            <p:menuitem value="Listagem"/>
+        </p:breadCrumb>
+
+        <p:card>
+            <p:messages closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+
+            <p:dataTable value="#{usuarioBean.usuarios}" var="usuario">
+
+                <f:facet name="header">
+                    <p:button outcome="usuario-novo.xhtml" icon="pi pi-plus"/>
+                </f:facet>
+
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{usuario.nome}"/>
+                </p:column>
+
+                <p:column headerText="CPF">
+                    <h:outputText value="#{usuario.cpf}"/>
+                </p:column>
+
+                <p:column headerText="E-Mail">
+                    <h:outputText value="#{usuario.email}"/>
+                </p:column>
+
+
+                <p:column>
+                    <p:commandButton icon="pi pi-pencil" actionListener="#{usuarioBean.selectEdicao(usuario)}"/>
+                    <p:spacer width="2"/>
+                    <p:commandButton icon="pi pi-trash"  actionListener="#{usuarioBean.selectExclusao(usuario)}"/>
+                </p:column>
+            </p:dataTable>
+
+        </p:card>
+    </h:form>
+</h:body>
+</html>

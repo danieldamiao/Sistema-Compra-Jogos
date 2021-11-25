@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="en"
+      lang="en">
+
+<f:metadata>
+    <f:viewAction action="#{pagamentoBean.listar}"/>
+    <f:viewAction action="#{administradorBean.verificarSessaoAdmin}"/>
+</f:metadata>
+
+<h:head>
+    <title>Pagamento Listar</title>
+    <h:outputScript name="locales/locale-pt.js" library="primefaces"/>
+</h:head>
+
+<h:body>
+    <h:form>
+
+        <ui:include src="menu-inicial.xhtml">
+
+        </ui:include>
+
+        <p:breadCrumb>
+            <p:menuitem value="Home" outcome="home.xhtml"/>
+            <p:menuitem value="Cadastros"/>
+            <p:menuitem value="Pagamentos"/>
+            <p:menuitem value="Listagem"/>
+        </p:breadCrumb>
+
+        <p:card>
+            <p:messages closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+
+            <p:dataTable value="#{pagamentoBean.pagamentos}" var="pagamento">
+
+                <p:column headerText="Codigo do Pagamento">
+                    <h:outputText value="#{pagamento.codigo}"/>
+                </p:column>
+
+                <p:column headerText="Codigo da Compra">
+                    <h:outputText value="#{pagamento.compra.codigoCompra}"/>
+                </p:column>
+
+                <p:column headerText="Número do Cartão">
+                    <h:outputText value="#{pagamento.cartao}"/>
+                </p:column>
+
+                <p:column headerText="Data">
+                    <h:outputText value="#{pagamento.compra.horario}">
+                        <f:convertDateTime type="localDate" pattern="dd/MM/yyyy hh:mm"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Jogo Comprado">
+                    <h:outputText value="#{pagamento.compra.jogo.tituloJogo}"/>
+                </p:column>
+
+
+//*inserir a parte da análise no compra listar usuario
+
+                <p:column>
+                    <p:commandButton icon="pi pi-pencil" actionListener="#{pagamentoBean.selecionarEdicao(pagamento)}"/>
+                    <p:spacer width="2"/>
+                    <p:commandButton icon="pi pi-trash"  actionListener="#{pagamentoBean.selecionarExclusao(pagamento)}"/>
+                </p:column>
+            </p:dataTable>
+
+        </p:card>
+    </h:form>
+</h:body>
+</html>

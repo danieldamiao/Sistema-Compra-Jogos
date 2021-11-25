@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="en"
+      lang="en">
+
+<f:metadata>
+    <f:viewAction action="#{jogoBean.carregarEdicao}"/>
+    <f:viewAction action="#{administradorBean.verificarSessaoAdmin}"/>
+</f:metadata>
+
+<h:head>
+    <title>Editar Jogo</title>
+</h:head>
+
+<h:body>
+    <h:form>
+
+        <ui:include src="menu-inicial.xhtml"></ui:include>
+
+        <p:breadCrumb>
+            <p:menuitem value="Home"/>
+            <p:menuitem value="Cadastros"/>
+            <p:menuitem value="Jogo"/>
+            <p:menuitem value="Novo"/>
+        </p:breadCrumb>
+
+        <p:card>
+
+            <p:messages closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+
+            <h:panelGrid columns="1" style="margin-left: 2%">
+
+                <p:inputText value="#{jogoBean.jogo.tituloJogo}" placeholder="Nome">
+                    <p:autoUpdate/>
+                </p:inputText>
+
+                <p:inputNumber value="#{jogoBean.jogo.precoJogo}" placeholder="Preço" decimalSeparator=",">
+                    <p:autoUpdate/>
+                </p:inputNumber>
+
+                <p:selectOneMenu value="#{jogoBean.jogo.genero}" converter="omnifaces.SelectItemsConverter" style="width: 100%">
+                    <f:selectItem itemLabel="Gênero" noSelectionOption="true"/>
+
+                    <f:selectItems value="#{jogoBean.generos}" var="generos" itemValue="#{generos}" itemLabel="#{generos.nomeGenero}"/>
+                    <p:autoUpdate/>
+                </p:selectOneMenu>
+
+                <p:selectOneMenu value="#{jogoBean.jogo.desenvolvedor}" converter="omnifaces.SelectItemsConverter" style="width: 100%;">
+                    <f:selectItem itemLabel="Desenvolvedor" noSelectionOption="true"/>
+
+                    <f:selectItems value="#{jogoBean.desenvolvedores}" var="desenvolvedores" itemValue="#{desenvolvedores}" itemLabel="#{desenvolvedores.nomeDev}"/>
+                    <p:autoUpdate/>
+                </p:selectOneMenu>
+
+            </h:panelGrid>
+
+            <h:panelGrid columns="2" style="margin: 2%">
+                <p:commandButton value="Salvar" actionListener="#{jogoBean.salvar}" icon="pi pi-save"/>
+                <p:button value="Voltar" outcome="jogo-listar.xhtml" icon="pi pi-times"/>
+            </h:panelGrid>
+
+        </p:card>
+    </h:form>
+</h:body>
+
+</html>

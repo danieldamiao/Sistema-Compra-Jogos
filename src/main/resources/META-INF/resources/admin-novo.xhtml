@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="en" lang="en">
+
+<f:metadata>
+    <f:viewAction action="#{administradorBean.novo}"/>
+</f:metadata>
+
+<h:head>
+    <title>Administrador</title>
+</h:head>
+
+<h:form>
+
+
+
+    <p:breadCrumb>
+        <p:menuitem value="Home"/>
+        <p:menuitem value="Cadastros"/>
+        <p:menuitem value="Administrador" outcome="admin-listagem"/>
+        <p:menuitem value="Novo"/>
+    </p:breadCrumb>
+
+    <p:card>
+        <p:messages closable="true">
+            <p:autoUpdate/>
+        </p:messages>
+
+        <h:panelGrid columns="1" style="margin-left: 2%"  columnClasses="ui-md-12">
+
+            <p:inputText value="#{administradorBean.administrador.nome}" placeholder="Nome">
+                <p:autoUpdate/>
+            </p:inputText>
+
+            <p:inputMask placeholder="CPF" value="#{administradorBean.administrador.cpf}" mask="999.999.999/99">
+
+            </p:inputMask>
+
+            <p:inputText value="#{administradorBean.administrador.email}" placeholder="E-Mail">
+                <p:autoUpdate/>
+            </p:inputText>
+
+            <p:password id="pwd1" value="#{administradorBean.administrador.senha}" match="pwd2" placeholder="Senha" required="true"/>
+
+            <p:password id="pwd2" value="#{administradorBean.administrador.senha}" placeholder="Confirmar Senha" required="true"/>
+
+        </h:panelGrid>
+
+        <h:panelGrid columns="2" style="margin: 2.5%">
+            <p:commandButton value="Salvar" actionListener="#{administradorBean.salvar}" icon="pi pi-save"/>
+            <p:button value="Voltar" outcome="home.xhtml" icon="pi pi-times"/>
+        </h:panelGrid>
+    </p:card>
+</h:form>
+<h:body>
+
+</h:body>
+</html>

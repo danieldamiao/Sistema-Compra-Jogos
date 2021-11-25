@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xml:lang="en"
+      lang="en">
+
+<f:metadata>
+    <f:viewAction action="#{jogoBean.carregarEdicao}"/>
+    <f:viewAction action="#{administradorBean.verificarSessaoAdmin}"/>
+</f:metadata>
+<h:head>
+    <title>Excluir Jogo</title>
+    <h:outputScript name="locales/locale-pt.js" library="primefaces"/>
+</h:head>
+
+<h:body>
+    <h:form>
+
+        <ui:include src="menu-inicial.xhtml"></ui:include>
+
+        <p:breadCrumb>
+            <p:menuitem value="Home"/>
+            <p:menuitem value="Cadastros"/>
+            <p:menuitem value="Jogos" outcome="jogo-listar.xhtml"/>
+            <p:menuitem value="Excluir"/>
+        </p:breadCrumb>
+
+        <p:card>
+
+
+            <p:messages closable="true">
+                <p:autoUpdate/>
+            </p:messages>
+
+            <h:panelGrid columns="1" style="margin-left: 2%">
+                <p:inputText value="#{jogoBean.jogo.tituloJogo}" placeholder="Título" disabled="true" style="width: 100%">
+                    <p:autoUpdate/>
+                </p:inputText>
+
+                <p:inputNumber value="#{jogoBean.jogo.precoJogo}" placeholder="Preço" decimalSeparator=","  disabled="true" style="width: 100%">
+                    <p:autoUpdate/>
+                </p:inputNumber>
+
+                <p:selectOneMenu value="#{jogoBean.jogo.genero}" converter="omnifaces.SelectItemsConverter"  disabled="true" style="width: 100%">
+                    <f:selectItem itemLabel="Gênero" noSelectionOption="true"/>
+                    <f:selectItems value="#{jogoBean.generos}" var="genero" itemValue="#{genero}" itemLabel="#{genero.nomeGenero}"/>
+                    <p:autoUpdate/>
+                </p:selectOneMenu>
+
+                <p:selectOneMenu value="#{jogoBean.jogo.desenvolvedor}" converter="omnifaces.SelectItemsConverter"  disabled="true" style="width: 100%">
+                    <f:selectItem itemLabel="Gênero" noSelectionOption="true"/>
+                    <f:selectItems value="#{jogoBean.desenvolvedores}" var="dev" itemValue="#{dev}" itemLabel="#{dev.nomeDev}"/>
+                    <p:autoUpdate/>
+                </p:selectOneMenu>
+            </h:panelGrid>
+
+            <h:panelGrid columns="2" style="margin: 2%">
+                <p:commandButton value="Exluir" actionListener="#{jogoBean.excluir}" icon="pi pi-trash"/>
+                <p:commandButton value="Voltar" actionListener="#{jogoBean.voltar}" icon="pi pi-times"/>
+            </h:panelGrid>
+
+        </p:card>
+
+    </h:form>
+</h:body>
+
+</html>
